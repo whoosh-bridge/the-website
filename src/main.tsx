@@ -1,10 +1,23 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
+import { AptosWalletAdapterProvider } from '@aptos-labs/wallet-adapter-react'
+import { PontemWallet } from "@pontem/wallet-adapter-plugin";
+import { Network } from "@aptos-labs/ts-sdk";
+import { TrustWallet } from "@trustwallet/aptos-wallet-adapter";
+const wallets = [new PontemWallet(), new TrustWallet()];
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  
+  <AptosWalletAdapterProvider
+    plugins={wallets}
+    autoConnect={true}    
+    optInWallets={["Petra"]}
+    dappConfig={{ network: Network.DEVNET, aptosApiKey: "my-generated-api-key" }}
+    onError={(error) => {
+      console.log(`${error}`);
+    }}
+  >
     <App />
-  </StrictMode>,
+  </AptosWalletAdapterProvider>,
 )

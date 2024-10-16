@@ -1,0 +1,19 @@
+{
+  "address": "0xd58057486691cb9e339ce1a6d79906e88e2819f3a2ab83e3e6241a5059cb270e",
+  "name": "woosh",
+  "friends": [],
+  "exposed_functions": [
+    {
+      "name": "main",
+      "visibility": "private",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer"
+      ],
+      "return": []
+    }
+  ],
+  "structs": []
+}
