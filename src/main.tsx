@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')!).render(
     plugins={wallets}
     autoConnect={true}    
     optInWallets={["Petra"]}
-    dappConfig={{ network: Network.DEVNET, aptosApiKey: "my-generated-api-key" }}
+    dappConfig={{ network: Network.DEVNET, aptosApiKey: "AG-4AP396KX3CNVWFDYMQZ1ETGIKAZDEMJVM" }}
     onError={(error) => {
       console.log(`${error}`);
     }}

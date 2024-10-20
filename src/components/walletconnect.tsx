@@ -1,11 +1,10 @@
-import { AptosStandardSupportedWallet, Wallet, WalletName, groupAndSortWallets, useWallet } from '@aptos-labs/wallet-adapter-react';
+import { WalletName, groupAndSortWallets, useWallet } from '@aptos-labs/wallet-adapter-react';
 import { Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 
 const WalletConnect = () => {
-  const { connect, disconnect,account, connected ,changeNetwork, wallets = [] ,signAndSubmitTransaction} = useWallet();  
+  const { connect, disconnect,account, connected ,wallets = [] ,signAndSubmitTransaction} = useWallet();  
 
-  const { aptosConnectWallets } =
-    groupAndSortWallets(wallets, {});
+  groupAndSortWallets(wallets, {});
 
  
   const handleConnect = async () => {
@@ -19,19 +18,6 @@ const WalletConnect = () => {
       console.error(`Failed to connect to wallet: ${error}` );
     }
   };
-
-  const handleConnect2 = async (wallet: Wallet| AptosStandardSupportedWallet<string>) =>{
-    try {
-      // Change below to the desired wallet name instead of "Petra"
-      
-      await connect(wallet.name); 
-      // await changeNetwork(Network.DEVNET);
-      console.log('Connected to wallet:', account);
-    } catch (error) {
-      console.log(error);
-      console.error(`Failed to connect to wallet: ${error}` );
-    }
-  }
  
   const handleDisconnect = async () => {
     try {      
@@ -47,7 +33,12 @@ const WalletConnect = () => {
     // await changeNetwork(Network.DEVNET);
     if(account != null){                              
       const APTOS_CONFIG = new AptosConfig({
-        network: Network.DEVNET,
+        network: Network.MAINNET,
+        // clientConfig: {
+        //   API_KEY: "AG-4AP396KX3CNVWFDYMQZ1ETGIKAZDEMJVM",
+        // },
+        // faucet:"http://127.0.0.1:8081/",
+        // indexer:"127.0.0.1:50051",
         // fullnode: "http://127.0.0.1:8080"        
       });
       
@@ -114,9 +105,8 @@ const WalletConnect = () => {
  
   return (
     <div>
-      <h1>Aptos Wallet Connection</h1>
-      {wallets.map(wallet=><p key={wallet.name}><img src={wallet.icon} width={32} height={32} />{wallet.name} <button onClick={()=>handleConnect2(wallet)}>Connect</button></p>)} 
-      <div>
+      <div>            
+        
         {connected ? (
           <div>
             <button onClick={stake}>Stake</button>
